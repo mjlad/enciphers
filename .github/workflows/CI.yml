@@ -10,8 +10,6 @@ permissions:
   contents: read
 
 jobs:
-
-
   linux:
     runs-on: ubuntu-latest
     strategy:
@@ -19,22 +17,18 @@ jobs:
         target: [x86_64, aarch64]
     steps:
       - uses: actions/checkout@v4
-
       - name: Build wheels
         uses: PyO3/maturin-action@v1
         with:
-          target    : ${{ matrix.target }}
-          manylinux : 2014
-          args      : --release --out dist --compatibility pypi
-          sccache   : true
-
+          target: ${{ matrix.target }}
+          manylinux: 2014
+          args: --release --out dist --compatibility pypi
+          sccache: true
       - name: Upload wheels
         uses: actions/upload-artifact@v4
         with:
           name: wheels-linux-${{ matrix.target }}
           path: dist
-
-
 
   windows:
     runs-on: windows-latest
@@ -43,21 +37,17 @@ jobs:
         target: [x86_64]
     steps:
       - uses: actions/checkout@v4
-
       - name: Build wheels
         uses: PyO3/maturin-action@v1
         with:
-          target : ${{ matrix.target }}
-          args   : --release --out dist --compatibility pypi
+          target: ${{ matrix.target }}
+          args: --release --out dist --compatibility pypi
           sccache: true
-
       - name: Upload wheels
         uses: actions/upload-artifact@v4
         with:
           name: wheels-windows-${{ matrix.target }}
           path: dist
-
-
 
   macos:
     runs-on: macos-latest
@@ -66,36 +56,31 @@ jobs:
         target: [x86_64, aarch64]
     steps:
       - uses: actions/checkout@v4
-
       - name: Build wheels
         uses: PyO3/maturin-action@v1
         with:
-          target : ${{ matrix.target }}
-          args   : --release --out dist --compatibility pypi
+          target: ${{ matrix.target }}
+          args: --release --out dist --compatibility pypi
           sccache: true
-
       - name: Upload wheels
         uses: actions/upload-artifact@v4
         with:
           name: wheels-macos-${{ matrix.target }}
           path: dist
 
-
-    publish:
-    runs-on      : ubuntu-latest
-    needs        : [linux, windows, macos]
-    environment  : pypi
-    permissions  :
-      id-token   : write
-
+  publish:
+    runs-on: ubuntu-latest
+    needs: [linux, windows, macos]
+    environment: pypi
+    permissions:
+      id-token: write
     steps:
       - name: Download all wheels
         uses: actions/download-artifact@v4
         with:
-          pattern      : wheels-*
-          path         : dist
+          pattern: wheels-*
+          path: dist
           merge-multiple: true
-
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
