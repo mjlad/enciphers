@@ -1,4 +1,4 @@
-# encipher
+# enciphers
 
 Fast Rust-powered encryption for Python.
 
@@ -7,7 +7,7 @@ Fast Rust-powered encryption for Python.
 > Tested on 1000 iterations. encipher uses Rust bindings.
 > Fernet and itsdangerous are pure Python. rfernet uses Rust bindings (Fernet algorithm).
 
-| | encipher | Fernet | rfernet | itsdangerous |
+| | enciphers | Fernet | rfernet | itsdangerous |
 |---|---|---|---|---|
 | encrypt (ms) | **0.45ms** | 10.42ms | 2.68ms | 11.96ms |
 | decrypt (ms) | **0.41ms** | 9.12ms | 1.69ms | 9.15ms |
@@ -16,7 +16,7 @@ Fast Rust-powered encryption for Python.
 | encrypts data | ✅ | ✅ | ✅ | ❌ signs only |
 | algorithm | Substitution + HMAC-SHA256 | AES-128-CBC | AES-128-CBC | HMAC |
 
-> **Note:** encipher uses a custom substitution cipher optimized for speed.
+> **Note:** enciphers uses a custom substitution cipher optimized for speed.
 > It is not a standard cryptographic algorithm and is not recommended
 > for highly sensitive data. Suitable for session tokens and non-critical data.
 
@@ -31,14 +31,14 @@ Fast Rust-powered encryption for Python.
 ## Installation
 
 ```bash
-pip install encipher-py
+pip install enciphers
 ```
 
 ## Usage
 
 ```python
 import orjson
-from encipher import Encipher
+from enciphers import Encipher
 
 cipher = Encipher(step=7, key=42)
 # or from environment variable
