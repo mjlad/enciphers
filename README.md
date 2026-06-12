@@ -4,7 +4,7 @@ Fast Rust-powered encryption for Python.
 
 ## Benchmark
 
-> Tested on 1000 iterations. encipher uses Rust bindings.
+> Tested on 1000 iterations. enciphers uses Rust bindings.
 > Fernet and itsdangerous are pure Python. rfernet uses Rust bindings (Fernet algorithm).
 
 | | enciphers | Fernet | rfernet | itsdangerous |
